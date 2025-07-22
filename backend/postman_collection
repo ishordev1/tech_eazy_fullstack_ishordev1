@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "61a68e01-2e23-43cb-b1e7-67c0213883c6",
+		"name": "Assignment Devops",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29424859"
+	},
+	"item": [
+		{
+			"name": "save parcel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"John Doe\",\r\n  \"recipient\": \"Jane Smith\",\r\n  \"address\": \"123 Main Street, Springfield\",\r\n  \"weight\": 2.5,\r\n  \"status\": \"Pending\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/parcels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parcels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tracking parcel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"John Doe\",\r\n  \"recipient\": \"Jane Smith\",\r\n  \"address\": \"123 Main Street, Springfield\",\r\n  \"weight\": 2.5,\r\n  \"status\": \"Pending\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/parcels/tracking/781705a5-3985-4981-8f29-08cf79947e8b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parcels",
+						"tracking",
+						"781705a5-3985-4981-8f29-08cf79947e8b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all parcel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sender\": \"John Doe\",\r\n  \"recipient\": \"Jane Smith\",\r\n  \"address\": \"123 Main Street, Springfield\",\r\n  \"weight\": 2.5,\r\n  \"status\": \"Pending\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/parcels",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parcels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Parcel",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
