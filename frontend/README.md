@@ -1,12 +1,43 @@
-# React + Vite
+# 📦 Parcel Management Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend React application** for the Parcel Management system.  
+It allows users to create, update, delete, and search parcels via a REST API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+✅ Create new parcel  
+✅ Edit existing parcel  
+✅ Delete parcel  
+✅ Search parcel by Tracking ID  
+✅ Responsive Bootstrap UI  
+✅ Table showing all parcels with actions  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## 🛠️ Tech Stack
+
+- React 18+
+- Bootstrap 5
+- Axios
+
+## ⚙️ Setup & Run
+
+### 1️⃣ Install dependencies
+npm install
+### 2️⃣ Start the development server
+npm start
+-App will run at: http://localhost:3000
+- Make sure your backend is running at the same time.
+- By default, the frontend expects backend endpoints at: http://localhost:8080/api/parcels
+- You can adjust API_URL in src/service/ParcelService.js if needed.
+
+### 📞 API Endpoints Used
+- Method	Endpoint	Description
+- GET	/api/parcels	Get all parcels
+- GET	/api/parcels/tracking/{id}	Get parcel by tracking ID
+- POST	/api/parcels	Create new parcel
+- PUT	/api/parcels/{id}	Update parcel by ID
+- DELETE	/api/parcels/{id}	Delete parcel by ID
+
+
