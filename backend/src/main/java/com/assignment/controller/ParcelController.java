@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.assignment.Dto.ApiResponse;
 import com.assignment.Dto.ParcelDto;
+import com.assignment.entity.Parcel;
 import com.assignment.service.ParcelService;
 
 @RestController
@@ -36,13 +37,13 @@ public class ParcelController {
     }
 
     @PostMapping
-    public ResponseEntity< ParcelDto> createParcel(@RequestBody ParcelDto dto) {
-        return new ResponseEntity<ParcelDto>(parcelService.createParcel(dto),HttpStatus.CREATED);
+    public ResponseEntity< ParcelDto> createParcel(@RequestBody Parcel parcel) {
+        return new ResponseEntity<ParcelDto>(parcelService.createParcel(parcel),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ParcelDto> updateParcel(@PathVariable String id, @RequestBody ParcelDto dto) {
-        return new ResponseEntity<ParcelDto>(parcelService.updateParcel(id, dto),HttpStatus.OK);
+    public ResponseEntity<ParcelDto> updateParcel(@PathVariable String id, @RequestBody Parcel parcel) {
+        return new ResponseEntity<ParcelDto>(parcelService.updateParcel(id, parcel),HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

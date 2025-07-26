@@ -1,4 +1,5 @@
 package com.assignment.serviceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +17,22 @@ import java.util.stream.Collectors;
 public class ParcelServiceImpl implements ParcelService {
     @Autowired
     private ParcelRepository parcelRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Override
-    public ParcelDto createParcel(ParcelDto dto) {
+    public ParcelDto createParcel(Parcel parcel) {
     	String trackingId=UUID.randomUUID().toString();
-    	dto.setTrackingId(trackingId);
-        Parcel parcel = dtoToParcel(dto);
-        
+    	parcel.setTrackingId(trackingId);
+
         Parcel saved = parcelRepository.save(parcel);
-        return parcelToDto(saved);
+        return this.modelMapper.map(saved, ParcelDto.class);
     }
     
     @Override
     public List<ParcelDto> getAllParcels() {
         return parcelRepository.findAll().stream()
-                .map(parcel -> parcelToDto(parcel))
+                .map(parcel -> this.modelMapper.map(parcel, ParcelDto.class))
                 .collect(Collectors.toList());
     }
 
@@ -38,25 +40,20 @@ public class ParcelServiceImpl implements ParcelService {
     public ParcelDto getParcelByTrackingId(String trackingId) {
         Parcel parcel = parcelRepository.findByTrackingId(trackingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Parcel not found with trackingId: " + trackingId));
-        return parcelToDto(parcel);
+        return this.modelMapper.map(parcel, ParcelDto.class);
     }
 
  
 
     @Override
-    public ParcelDto updateParcel(String id, ParcelDto dto) {
-        Parcel parcel = parcelRepository.findById(id)
+    public ParcelDto updateParcel(String id, Parcel parcel) {
+        Parcel dbParcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Parcel not found with id: " + id));
-
-        parcel.setTrackingId(dto.getTrackingId());
-        parcel.setSender(dto.getSender());
-        parcel.setRecipient(dto.getRecipient());
-        parcel.setAddress(dto.getAddress());
-        parcel.setWeight(dto.getWeight());
-        parcel.setStatus(dto.getStatus());
-
+parcel.setId(dbParcel.getId());
+parcel.setTrackingId(dbParcel.getTrackingId());
+       
         Parcel updated = parcelRepository.save(parcel);
-        return parcelToDto(updated);
+        return this.modelMapper.map(updated, ParcelDto.class);
     }
 
     @Override
@@ -64,28 +61,5 @@ public class ParcelServiceImpl implements ParcelService {
         parcelRepository.deleteById(id);
     }
 
-    private ParcelDto parcelToDto(Parcel parcel) {
-        ParcelDto dto = new ParcelDto();
-        dto.setId(parcel.getId());
-        dto.setTrackingId(parcel.getTrackingId());
-        dto.setSender(parcel.getSender());
-        dto.setRecipient(parcel.getRecipient());
-        dto.setAddress(parcel.getAddress());
-        dto.setWeight(parcel.getWeight());
-        dto.setStatus(parcel.getStatus());
-        return dto;
-    }
     
-
-    private Parcel dtoToParcel(ParcelDto dto) {
-        Parcel parcel = new Parcel();
-        parcel.setId(dto.getId());
-        parcel.setTrackingId(dto.getTrackingId());
-        parcel.setSender(dto.getSender());
-        parcel.setRecipient(dto.getRecipient());
-        parcel.setAddress(dto.getAddress());
-        parcel.setWeight(dto.getWeight());
-        parcel.setStatus(dto.getStatus());
-        return parcel;
-    }
 }
